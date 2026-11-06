@@ -76,3 +76,20 @@
   old `rubric` and `docket-format` in the courtroom must be deleted by a person before
   the new ones are added. Saved Switch template `hackhq-court` not yet updated.
 - **Next step:** Re-file is-odd as C-2 and check it comes out REJECT (ineligible).
+
+## 2026-11-06: Court generalised to any sponsor
+
+- **What changed:** Judges configure the hackathon in the courtroom (sponsor urls, theme,
+  build window) and the presiding judge saves it as a `hackathon` document. The auditor
+  became the Sponsor Auditor: it researches the sponsor's site, docs and GitHub into a
+  `sponsor-brief` document, then judges "Use of the sponsor" with a WITHOUT SPONSOR
+  check. Theme caps Creativity at 3 when missed. Eligibility uses the configured window.
+  Chamber renamed `hackhq-chamber-switch` -> `hackhq-chamber-sponsor`. Live agents,
+  courtroom instructions, role and `eligibility` document synced.
+- **Why:** Hard-coding Switch as a criterion made the court useless for other hackathons
+  and hard to test; any sponsor with public projects can now be used for tests.
+- **Files:** templates/hackhq-court.template.yaml, HANDOFF.md, docs/CHANGELOG.md
+- **Known issues:** Courtroom `rubric` and `docket-format` are still the old template-made
+  versions until a person deletes them. Saved Switch template not updated yet. Link label
+  courtroom -> sponsor chamber still says "use of Switch".
+- **Next step:** Recreate rubric and docket-format, configure Supabase, run 3 test cases.

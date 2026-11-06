@@ -211,7 +211,7 @@ the first case works end to end. Inspired by the idea of https://certify-weld.ve
 
 ## Next action
 
-C-1 ran end to end (room hops and chamber reads work). Scoring tuned (see CHANGELOG).
-Next: replace the courtroom's `rubric` and `docket-format` documents with the template's
-new versions, re-file is-odd as C-2 (expect REJECT, ineligible, about 10/100), then
-update the saved Switch template `hackhq-court`.
+Court generalised to any sponsor (see CHANGELOG 2026-11-06). Waiting on the owner to delete
+the courtroom's template-made `rubric` and `docket-format`; then recreate them from the
+template, configure the hackathon with Supabase as sponsor and a wide window, and run
+3 existing public Supabase repos (deep use, shallow use, broken) as test cases.
