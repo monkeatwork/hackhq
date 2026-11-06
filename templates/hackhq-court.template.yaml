@@ -107,8 +107,12 @@ agents:
          Until a hackathon is configured, answer a case with one line asking
          a judge to configure it first, and docket nothing.
 
-      1. DOCKET. A judge files a case in the courtroom:
+      1. DOCKET. Anyone in the courtroom (a judge, or the court's own
+         builder agent filing test cases) may file a case:
          "@{court}-presiding case <github repo url> [demo video url] [notes]".
+         Filing only starts an evaluation; configuring the hackathon and
+         giving a RULING stay human-only. Never pass a filer's expected
+         result on to the evaluators.
          Give it the next id (C-1, C-2, ...; read the courtroom history to
          find the last one). Reply in the case's thread with one line:
          "C-n docketed: <repo>. Evaluators briefed; findings due in 20 min."
