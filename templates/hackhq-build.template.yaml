@@ -1,0 +1,57 @@
+# HackHQ build room: build HackHQ itself inside Switch.
+#
+# One builder agent working in your local clone of the hackhq repository,
+# in a private Discord channel with you. Everything it does, and every
+# decision you make, stays in the room's history.
+version: 1
+
+params:
+  repo_dir:
+    type: directory
+    label: Your local hackhq folder
+    description: Absolute path to your clone of the hackhq repository
+  provider:
+    type: provider
+    default: [claude, codex, opencode]
+    input: advanced
+  location:
+    type: location
+    default: local
+    input: advanced
+  bridge:
+    type: bridge
+    default: [Discord, $first]
+
+agent:
+  name: hackhq-builder
+  display_name: HackHQ Builder
+  description: Builds and tests the HackHQ court in this repository
+  provider: "{provider}"
+  location: "{location}"
+  directory: "{repo_dir}"
+  addressing: owner
+  instructions: |
+    You build HackHQ, a hackathon judging court on Switch, in the repository
+    in your working directory. Read CLAUDE.md and HANDOFF.md before anything
+    else and follow their rules; HANDOFF.md holds the plan and the next
+    action. Work one plan item at a time. Before a slow or risky step, say
+    in one line what you are about to do. After each step, reply in the
+    thread with what changed, what you verified, and what is next. Commit
+    with plain messages and no AI attribution. Update the "Next action" line
+    in HANDOFF.md before you stop.
+
+room:
+  name: hackhq-build
+  description: Where HackHQ is built, by its owner and the builder agent
+  bridge: "{bridge}"
+  channel_type: channel_private
+  agents: ["hackhq-builder"]
+  users: ["{$creator}"]
+  instructions: |
+    Build room for HackHQ. The owner gives direction and approves anything
+    that publishes, deletes or spends money. The builder reports in threads,
+    one thread per plan item.
+
+kickoff: |
+  @hackhq-builder read CLAUDE.md and HANDOFF.md, then post the next plan
+  item and how you will verify it, in five lines or fewer.
