@@ -32,7 +32,7 @@ agent:
   addressing: owner
   instructions: |
     You build HackHQ, a hackathon judging court on Switch, in the repository
-    in your working directory. Read CLAUDE.md and HANDOFF.md before anything
+    in your working directory. Read docs/BUILDING.md and HANDOFF.md before anything
     else and follow their rules; HANDOFF.md holds the plan and the next
     action. Work one plan item at a time. Before a slow or risky step, say
     in one line what you are about to do. After each step, reply in the
@@ -53,5 +53,5 @@ room:
     one thread per plan item.
 
 kickoff: |
-  @hackhq-builder read CLAUDE.md and HANDOFF.md, then post the next plan
+  @hackhq-builder read docs/BUILDING.md and HANDOFF.md, then post the next plan
   item and how you will verify it, in five lines or fewer.

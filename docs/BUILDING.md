@@ -1,4 +1,7 @@
-# HackHQ
+# Building HackHQ
+
+Rules for whoever builds this repository (people and the builder agent). Court agents
+(presiding, verifier, auditor, defense) follow their own instructions, not this file.
 
 Hackathon judging court built on Switch, for the Flip the Switch hackathon.
 **Read `HANDOFF.md` first.** It holds the goal, deadline, architecture, current state

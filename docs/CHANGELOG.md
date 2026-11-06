@@ -47,3 +47,14 @@
   clone carries the builder's CLAUDE.md, which may confuse it. Kickoff replies not yet
   confirmed (builder is not a member of the court rooms).
 - **Next step:** Confirm kickoffs, then file the first case (step 3).
+
+## 2026-11-06: Step 2 done, builder rules moved
+
+- **What changed:** Kickoffs confirmed (presiding intro in the courtroom, each evaluator
+  answered in its chamber). Builder joined the courtroom. Moved builder rules from
+  CLAUDE.md to docs/BUILDING.md and updated the build template to point there.
+- **Why:** The verifier works in a clone of this repo and was loading the builder's rules.
+- **Files:** docs/BUILDING.md (was CLAUDE.md), templates/hackhq-build.template.yaml,
+  HANDOFF.md, .gitignore, docs/CHANGELOG.md
+- **Known issues:** The verifier's current session may still hold the old rules until reset.
+- **Next step:** File the first case (step 3).

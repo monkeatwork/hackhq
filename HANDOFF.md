@@ -134,8 +134,12 @@ Set up so far: Switch Console installed, Discord connected, a test agent answere
 (run_template; version 1 still runs): group "hackhq court", 4 rooms on the HackHQ Building
 Discord, agents presiding/verifier/auditor/defense all on claude, all running. Verifier's
 directory has the hackhq clone. Known gaps: Discord would not add monkeatsleep to the three
-private chambers (`add_users_to_room` returns unresolved); the verifier loads this repo's
-CLAUDE.md (builder rules) because its working directory is a clone of this repo.
+private chambers (`add_users_to_room` returns unresolved), but the owner can see them as
+Discord server owner. Kickoffs confirmed: presiding introduced the court, each evaluator
+answered in its chamber. hackhq-builder is a member of the courtroom (not the chambers).
+Builder rules moved from CLAUDE.md to docs/BUILDING.md so court agents working in a clone
+of this repo do not load them; the builder loads them through a local, untracked
+CLAUDE.local.md.
 
 ## 5. Plan
 
@@ -207,6 +211,7 @@ the first case works end to end. Inspired by the idea of https://certify-weld.ve
 
 ## Next action
 
-Repo is public at https://github.com/monkeatwork/hackhq (Fri 16:45 IST). Next: import
-`templates/hackhq-court.template.yaml` in Switch Console (check whether template format
-version 1 is still accepted) and run `./sandbox/sandbox.sh build`.
+Step 2 done (Fri 17:30 IST). Step 3: a human judge files the first case in
+hackhq-courtroom with a small public repo; watch the presiding agent brief all three
+chambers (connect_to_room hops) and gather FINDINGS with read_context(room_id=...);
+done when a draft ruling appears in the case thread.
