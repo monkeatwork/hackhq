@@ -26,3 +26,13 @@
   Builder agent lacks "can manage agents", so the court template is imported from
   Switch Console. Codex is not installed and opencode sign-in is unknown on this Mac.
 - **Next step:** Import the court template (all agents on claude), build the sandbox image.
+
+## 2026-11-06: Sandbox verified live
+
+- **What changed:** Built `hackhq-sandbox:latest` and ran a smoke case (C-0) on
+  octocat/Hello-World: clone, exec, numbered evidence log, writes to /etc refused
+  (non-root), non-GitHub URL rejected. Evidence removed afterwards.
+- **Why:** Step 2, the verifier depends on the image.
+- **Files:** HANDOFF.md, docs/CHANGELOG.md
+- **Known issues:** Court template not imported yet.
+- **Next step:** Import the court template in Switch Console, confirm 4 rooms and kickoffs.

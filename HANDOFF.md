@@ -117,6 +117,8 @@ no docker socket, `--cap-drop ALL`, `no-new-privileges`, 2 GB / 2 CPU / 512 pids
   links and room agents resolve.
 - `sandbox.sh` dry-run with a stub `docker`: logging, numbering, exit codes and the
   input guards all work.
+- Sandbox image built live on the Mac (Docker 29.9.2) and smoke-tested on
+  octocat/Hello-World: clone, exec, numbered log, non-root user, URL guard (Fri 17:05).
 
 **Not yet verified live (do these first):**
 1. The template imports in Switch Console and creates all 4 rooms in Discord.
