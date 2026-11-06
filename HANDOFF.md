@@ -135,6 +135,7 @@ Set up so far: Switch Console installed, Discord connected, a test agent answere
 | Fri 16:00–16:30 | Push this repo public as `monkeatwork/hackhq` | Repo visible on GitHub |
 | Fri 16:30–18:00 | Import the court template, kickoffs run | Presiding introduces the court; verifier reports the image built |
 | Fri 18:00–19:00 | First case end to end | A draft ruling appears in the courtroom thread |
+| Sat 09:00–11:00 | Step 3b: certificate clerk (see below) | A judge's RULING produces a verifiable certificate in Discord |
 | Fri 19:00–23:00 | Three test repos, tune instructions | Rulings match what we expected for each fixture |
 | Sat 09:00–13:00 | Fixes + "court vs one strong prompt" comparison | Table of results for the README |
 | Sat 13:00–17:00 | README (architecture diagram, reproduce steps), demo video (2–3 min) | Video uploaded, README complete |
@@ -151,6 +152,21 @@ Set up so far: Switch Console installed, Discord connected, a test agent answere
 5. Blog for a first-time Switch user (judged on clarity, accuracy, usefulness).
 6. Stretch: `@scout` (creativity / prior art); presiding creates a fresh set of rooms per
    case with `create_room_from_yaml`.
+
+### Step 3b: certificate clerk (added Fri 6 Nov)
+
+A `hackhq-clerk` agent issues certificates in three tiers, only after a human judge's
+RULING is recorded:
+- **Participant**: every submission that was filed as a case.
+- **Shortlisted**: second stage (RULING: SHORTLIST).
+- **Winner**: named by a human judge after shortlisting.
+
+Each certificate (PDF/PNG: name, project, tier, date, certificate id) is posted as a
+Discord attachment (`send_attachment`). Its id and SHA-256 hash go in a ledger (room
+document + JSON in the repo) so anyone can ask the clerk `verify <id>`. Certificates are
+clearly HackHQ Court certificates, not official Flip the Switch ones. Build only after
+the first case works end to end. Inspired by the idea of https://certify-weld.vercel.app/
+(participant lookup + PDF download); verification is our addition.
 
 ## 6. Useful Switch facts
 
