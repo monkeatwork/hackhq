@@ -182,5 +182,6 @@ Set up so far: Switch Console installed, Discord connected, a test agent answere
 
 ## Next action
 
-Push this folder to a public GitHub repo `monkeatwork/hackhq`, then import
-`templates/hackhq-court.template.yaml` in Switch Console.
+Repo is public at https://github.com/monkeatwork/hackhq (Fri 16:45 IST). Next: import
+`templates/hackhq-court.template.yaml` in Switch Console (check whether template format
+version 1 is still accepted) and run `./sandbox/sandbox.sh build`.
