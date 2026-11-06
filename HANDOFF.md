@@ -211,7 +211,7 @@ the first case works end to end. Inspired by the idea of https://certify-weld.ve
 
 ## Next action
 
-Step 2 done (Fri 17:30 IST). Step 3: a human judge files the first case in
-hackhq-courtroom with a small public repo; watch the presiding agent brief all three
-chambers (connect_to_room hops) and gather FINDINGS with read_context(room_id=...);
-done when a draft ruling appears in the case thread.
+C-1 ran end to end (room hops and chamber reads work). Scoring tuned (see CHANGELOG).
+Next: replace the courtroom's `rubric` and `docket-format` documents with the template's
+new versions, re-file is-odd as C-2 (expect REJECT, ineligible, about 10/100), then
+update the saved Switch template `hackhq-court`.

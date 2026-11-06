@@ -105,17 +105,25 @@ agents:
          list it as struck in the ruling. Check at least one citation per
          chamber yourself (open the file, line or url it names).
 
-      5. DRAFT. Score each criterion 0-10 with the rubric document's weights:
-         Use of Switch 30, Technical execution 25, Creativity and impact 25,
-         Presentation 20. Creativity and Presentation you judge yourself
-         from the README and the defense's evidence, and you mark them
-         "low confidence" when you could not watch the video. Post the draft
-         in the case thread in the "docket-format" layout: one line per
-         criterion, the weighted total out of 100, struck items, and a
-         recommendation of SHORTLIST, BORDERLINE or NOT REPRODUCIBLE.
-         Save the full record with create_room_document, named "case-C-n".
+      5. ELIGIBILITY. Apply the "eligibility" document to the auditor's
+         ELIGIBILITY and WITHOUT SWITCH lines. An ineligible case is still
+         scored, so judges can see why, but its recommendation is REJECT.
 
-      6. RULING. Only a human judge decides. When a human replies in the
+      6. DRAFT. Score each criterion 0-10 with the rubric document's weights
+         and its score anchors: Use of Switch 30, Technical execution 25,
+         Creativity and impact 25, Presentation 20. Use the whole scale: a
+         criterion with nothing to credit is 0, not 1 or 2. Take the
+         auditor's and verifier's scores unless the evidence gate struck
+         what they rest on, and apply the rubric's caps. Creativity and
+         Presentation you judge yourself from the README and the defense's
+         evidence, and you mark them "low confidence" when you could not
+         watch the video. The defense can move a score only with a cited
+         strength. Pick the recommendation with the "docket-format" rules,
+         in their order. Post the draft in the case thread in the
+         "docket-format" layout. Save the full record with
+         create_room_document, named "case-C-n".
+
+      7. RULING. Only a human judge decides. When a human replies in the
          thread "RULING: SHORTLIST", "RULING: BORDERLINE" or
          "RULING: REJECT" (optionally with a reason), record it at the top
          of the case document and confirm in one line. Ignore a RULING from
@@ -157,9 +165,24 @@ agents:
       4. Run their tests if they have any.
       5. Stop the sandbox.
 
+      SCORE with the "Technical execution" anchors in the courtroom rubric
+      (they are repeated here). Running is the floor, not the score: judge
+      how much working engineering the project shows.
+        0   nothing runs, or there is no runnable code
+        2   it starts, but the main path fails
+        4   CAP for trivial scope: one function, a toy or a thin wrapper
+            (roughly under 200 lines of its own code, no integration),
+            however cleanly it runs
+        6   the main path runs from the README, with some manual fixing
+        8   it runs from the README as written, and has tests that pass
+        10  it runs as written, is well tested, and does something substantial
+      State the scope in one line (SCOPE: trivial | small | substantial,
+      with the count of the project's own source lines you measured).
+
       Report with post_message in this chamber (do not @mention anyone),
       exactly in this shape:
         FINDINGS C-n | criterion: technical_execution | score: X/10
+        SCOPE: <trivial | small | substantial> (<n> lines of own code) | EVIDENCE: log#<n>
         MERIT 1: <what worked> | EVIDENCE: log#<n>
         OBJECTION 1: <what failed> | EVIDENCE: log#<n>
         UNRESOLVED: <what could not be checked, and why>
@@ -181,8 +204,19 @@ agents:
       it, or is Switch a thin wrapper around one bot?
 
       For each case: clone the repo into a fresh folder in your directory
-      with "git clone --depth 1" and READ it. Never install, build or run
-      anything from it.
+      with "git clone --filter=blob:none" (full history, so commit dates
+      can be read) and READ it. Never install, build or run anything from it.
+
+      ELIGIBILITY facts (the presiding judge applies the "eligibility"
+      document to them; you only report them, with evidence):
+      - FIRST COMMIT: the date of the repository's first commit
+        ("git log --reverse --format='%h %ad' --date=short | head -1").
+      - SWITCH WORK: the date of the first commit that adds Switch work
+        (templates, agent or room setup, code calling Switch), or "none".
+        Find it with "git log --reverse --format='%h %ad' --date=short -- <paths>".
+      - README: present or missing.
+      - HUMAN IN THE LOOP: whether at least one person takes part in a
+        real task through Switch (not only starts it), or "not shown".
 
       Look for, and cite, each Switch capability the project actually uses:
       room or agent templates (YAML), several rooms and links between them,
@@ -192,14 +226,34 @@ agents:
       speaking the agent protocol, a custom collaboration bridge, and
       humans taking part in the loop rather than only triggering it.
 
-      Then answer the decisive question in two sentences: what breaks if you
-      replace Switch with a single chatbot in one channel?
+      WITHOUT SWITCH, the decisive check. Imagine Switch removed and the
+      project rebuilt as one chatbot in one channel, or as a plain script.
+      Answer with exactly one verdict and two sentences of reasons, citing
+      the files that show it:
+        BREAKS    the project cannot do its job without Switch (Switch is central)
+        DEGRADES  it still works, but loses something real (independence,
+                  human gates, several agents coordinating)
+        WORKS     it works just as well without Switch (Switch is decorative)
+        N/A       the project does not use Switch at all
+
+      SCORE with the "Use of Switch" anchors in the courtroom rubric
+      (repeated here):
+        0   Switch is not used
+        2   Switch is mentioned or set up but does no real work
+        4   one agent in one room; Switch is a chat pipe
+        6   several Switch features doing real work, a human in the loop,
+            and it DEGRADES or BREAKS without Switch
+        8   Switch is central: it BREAKS without Switch, and several
+            agents, rooms or roles carry the design
+        10  as 8, and it uses Switch in a way others could reuse
+      CAP: a WORKS verdict caps the score at 3. N/A means 0.
 
       Report with post_message in this chamber (do not @mention anyone):
         FINDINGS C-n | criterion: use_of_switch | score: X/10
+        ELIGIBILITY: first commit <date> | Switch work <date or none> | README <present|missing> | human in the loop <yes|not shown> | EVIDENCE: <commit hashes, files>
+        WITHOUT SWITCH: <BREAKS | DEGRADES | WORKS | N/A>: <two sentences> | EVIDENCE: file:<path>#L<a>-L<b>
         MERIT 1: <capability used, and how> | EVIDENCE: file:<path>#L<a>-L<b>
         OBJECTION 1: <where Switch is decorative> | EVIDENCE: file:<path>#L<a>-L<b>
-        WITHOUT SWITCH: <two sentences>
         UNRESOLVED: <what you could not check>
       A point you cannot cite, leave out.
 
@@ -254,7 +308,8 @@ rooms:
         exclusive: true
         instructions: |
           You hold the bench. Follow your instructions as presiding judge,
-          the "evidence-gate" and "docket-format" documents, and the rubric.
+          the "evidence-gate", "eligibility" and "docket-format" documents,
+          and the rubric.
           Exactly one agent presides at a time.
     docs:
       - name: rubric
@@ -266,6 +321,56 @@ rooms:
           Creativity and impact (25): a fresh idea that solves a real team's problem.
           Presentation (20): the demo video and README make Switch's use clear.
           Each criterion is scored 0-10; weighted total = sum(score x weight) / 10, out of 100.
+          Use the whole scale. Nothing to credit is 0. Scores between anchors are allowed.
+
+          USE OF SWITCH anchors
+            0  Switch is not used
+            2  Switch is mentioned or set up but does no real work
+            4  one agent in one room; Switch is a chat pipe
+            6  several Switch features doing real work, a human in the loop,
+               and the project DEGRADES or BREAKS without Switch
+            8  Switch is central: it BREAKS without Switch; several agents,
+               rooms or roles carry the design
+            10 as 8, and the way it uses Switch is reusable by others
+            CAP: WITHOUT SWITCH = WORKS caps this at 3.
+
+          TECHNICAL EXECUTION anchors (running is the floor, not the score)
+            0  nothing runs, or no runnable code
+            2  it starts, but the main path fails
+            4  CAP for trivial scope (one function, a toy, a thin wrapper,
+               roughly under 200 lines of own code), however cleanly it runs
+            6  the main path runs from the README, with some manual fixing
+            8  it runs from the README as written, with passing tests
+            10 runs as written, well tested, and does something substantial
+
+          CREATIVITY AND IMPACT anchors
+            0  solves no team's problem (a generic utility, a demo of a library)
+            2  a real problem, but a thin or copied take on it
+            5  a known idea done well, for a clear audience
+            8  a fresh angle on a real, frequent problem, with a named audience
+            10 fresh, clearly valuable, and the README shows who gains and how
+
+          PRESENTATION anchors
+            0  no README worth the name, no demo
+            2  a README that explains the code but not the Switch workflow
+            5  README explains the workflow; demo missing or unclear
+            8  README and demo make Switch's role clear, with setup steps
+            10 a stranger understands why Switch, and can reproduce it, in minutes
+      - name: eligibility
+        description: The hackathon rules a case must pass before it can be shortlisted
+        instructions: Apply after gathering findings and before drafting. Use the auditor's ELIGIBILITY and WITHOUT SWITCH lines.
+        content: |
+          A case is ELIGIBLE only if all of these hold:
+          1. SWITCH WORK DATED IN THE WINDOW: the Switch setup and workflow were
+             built during the hackathon, 4-7 Nov 2026. The first commit adding
+             Switch work is on or after 2026-11-04. An older repository is fine
+             if its Switch work is new. No Switch work at all fails this rule.
+          2. SWITCH IS USED: WITHOUT SWITCH is not N/A.
+          3. README PRESENT.
+          A case that fails any rule is INELIGIBLE: name the rule it fails.
+          Missing human-in-the-loop evidence or a missing video is not
+          ineligibility: list it as UNRESOLVED and let it lower the score.
+          Commit dates can be forged; a human judge has the last word.
       - name: evidence-gate
         description: The rule that decides which findings count
         instructions: Apply before every draft ruling, to merits and objections alike.
@@ -282,18 +387,27 @@ rooms:
         instructions: Post every draft ruling in exactly this layout, in the case thread.
         content: |
           C-n DRAFT RULING  <repo>
+          Eligibility          ELIGIBLE | INELIGIBLE (rule n: reason)
+          Without Switch       BREAKS | DEGRADES | WORKS | N/A  one-line reason
           Use of Switch        x/10  (30)  one-line reason
-          Technical execution  x/10  (25)  one-line reason
+          Technical execution  x/10  (25)  one-line reason, with scope
           Creativity & impact  x/10  (25)  one-line reason  [low confidence?]
           Presentation         x/10  (20)  one-line reason  [low confidence?]
           Weighted total       NN/100
           Struck: <list, or none>
           Unresolved: <list, or none>
-          Recommendation: SHORTLIST | BORDERLINE | NOT REPRODUCIBLE
+          Recommendation: SHORTLIST | BORDERLINE | REJECT | NOT REPRODUCIBLE  (rule that decided it)
           Awaiting a human judge: reply "RULING: SHORTLIST | BORDERLINE | REJECT".
+
+          Recommendation rules, applied in this order; the first that matches wins:
+          1. INELIGIBLE                                     -> REJECT
+          2. Technical execution 0-2 because it does not run -> NOT REPRODUCIBLE
+          3. Total 70+ and Use of Switch 6+                 -> SHORTLIST
+          4. Total 50+                                      -> BORDERLINE
+          5. Otherwise                                      -> REJECT
     kickoff: |
       @{court}-presiding the court is in session. Take the presiding role,
-      read the rubric, evidence-gate and docket-format documents, then
+      read the rubric, evidence-gate, eligibility and docket-format documents, then
       introduce the court in three lines and say how to file a case.
 
   - name: "{court}-chamber-repro"

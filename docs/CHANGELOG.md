@@ -58,3 +58,21 @@
   HANDOFF.md, .gitignore, docs/CHANGELOG.md
 - **Known issues:** The verifier's current session may still hold the old rules until reset.
 - **Next step:** File the first case (step 3).
+
+## 2026-11-06: Scoring tuned after case C-1
+
+- **What changed:** Court template and live court: score anchors for all four criteria;
+  technical execution capped at 4 for trivial scope; new `eligibility` document (Switch
+  work dated 4-7 Nov 2026, Switch used, README present); auditor reports commit dates
+  and a WITHOUT SWITCH verdict (BREAKS / DEGRADES / WORKS / N/A, WORKS caps Use of
+  Switch at 3); draft ruling gains Eligibility and Without Switch lines, a REJECT
+  recommendation and fixed thresholds (SHORTLIST 70+ with Use of Switch 6+,
+  BORDERLINE 50+, else REJECT; ineligible always REJECT).
+- **Why:** C-1 (is-odd, a 2014 one-function library with no Switch) scored 29/100 and
+  was recommended BORDERLINE: no anchors, "runs" earned 8/10, no eligibility check, and
+  no REJECT recommendation existed.
+- **Files:** templates/hackhq-court.template.yaml, HANDOFF.md, docs/CHANGELOG.md
+- **Known issues:** Template-created room documents cannot be edited by an agent; the
+  old `rubric` and `docket-format` in the courtroom must be deleted by a person before
+  the new ones are added. Saved Switch template `hackhq-court` not yet updated.
+- **Next step:** Re-file is-odd as C-2 and check it comes out REJECT (ineligible).
