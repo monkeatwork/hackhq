@@ -1,0 +1,12 @@
+```
+Eligibility          INELIGIBLE (rule 2: Supabase is not used. A case-insensitive search for "supabase" across the repo returns no matches, and the only runtime dependency is is-number (package.json:28-30). Rule 1 also fails, because no commit ever uses the sponsor's product.)
+Without sponsor      N/A  The project never uses Supabase. index.js:10-24 is a pure function that checks whether a number is odd.
+Use of the sponsor   0/10  Supabase is not used anywhere. Nothing is installed (package.json:28-34), imported or mentioned in the code or the README.
+Technical execution  4/10  The code looks clean and test.js exists with a mocha test script (package.json:25-27). But the scope is trivial: about 15 lines of its own code (index.js:12-24), so the cap for trivial scope applies. This repo is a clone of jonschlinkert/is-odd (.git/logs/HEAD:1), not work done for the hackathon.
+Creativity & impact  0/10  This is a generic utility, a single function that returns true for odd integers (README.md:3, index.js:23). It solves no team's problem. It is an existing third-party npm package from 2015-2017 (index.js:4).
+Presentation         2/10  The README covers install and usage (README.md:7-27) but does not say what the project is for in any hackathon sense. It has no demo video and does not mention the sponsor.
+Weighted total       14/100
+Recommendation       REJECT
+```
+
+Weighted total: (0×30 + 4×25 + 0×25 + 2×20) / 10 = 14. Ineligibility comes first in the recommendation rules, so the result is REJECT whatever the score.

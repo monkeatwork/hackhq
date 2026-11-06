@@ -1,0 +1,15 @@
+Eligibility          ELIGIBLE. Rule 1: I couldn't read the commit dates because running `git log` needed approval and wasn't run. The dependencies show the window is met anyway. `@supabase/supabase-js ^2.93.2` and `next 16.1.6` (package.json:13,17) are both 2025–26 releases, and the clone in `.git/logs/HEAD:1` (timestamp 1794007254, Nov 2026) comes before the window closes. Rule 2: Supabase is used (`app/api/waitlist/route.ts:2,78-120`). Rule 3: there is a README (`README.md`).
+
+Without sponsor      DEGRADES. With no Supabase keys, the API falls back to a "demo mode". Signups return a random position and are never saved (`app/api/waitlist/route.ts:66-75`), and the counter is stuck at 1 (`route.ts:152-155`, `app/page.tsx:15-18`). The landing page still renders, but the waitlist, which is its only real job, does no real work.
+
+Use of the sponsor   4/10. Supabase is used for one feature in one place: a `waitlist` Postgres table with a duplicate check, an insert and a count (`route.ts:81-120`, `app/page.tsx:20-23`). Any database could replace it. The README turns on Realtime for the counter (`README.md:47-48`), but the code never subscribes. It polls `/api/waitlist` every 30 seconds instead (`components/Hero.tsx:16-32`). `@supabase/ssr` is installed but never imported (package.json:12), and the `lib/supabase.ts` client is unused.
+
+Technical execution  5/10. It is a tidy Next.js landing page with about 2,000 lines of code, mostly presentation components (`components/*.tsx`). The main path is short (a form posts to an API that inserts a row) and should run once Supabase is set up. Some manual fixing is needed: the README tells you to `cp .env.local.example` (`README.md:33`), but that file isn't in the repo. The README says Next.js 14 (`README.md:73`) while the project uses 16.1.6. There are no tests.
+
+Creativity & impact  2/10. This is a waitlist and marketing site for a "learn AI, ship a product in 2.5 weeks" programme (`README.md:3-5`, `OneMillion.Build.md`). Collecting signups is a real need, but this is a standard waitlist page and doesn't build anything new for a team.
+
+Presentation         4/10. The README gives clear setup steps, including the SQL schema and environment variables (`README.md:36-61`). It says almost nothing about what OneMillion is or who it is for beyond a tagline. There is no demo video. It also misdescribes the project: it says Supabase Realtime powers the counter, names a missing env template and gives the wrong Next.js version.
+
+Weighted total       38/100  (4×30 + 5×25 + 2×25 + 4×20 = 375 / 10)
+
+Recommendation       REJECT
