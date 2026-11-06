@@ -93,3 +93,14 @@
   versions until a person deletes them. Saved Switch template not updated yet. Link label
   courtroom -> sponsor chamber still says "use of Switch".
 - **Next step:** Recreate rubric and docket-format, configure Supabase, run 3 test cases.
+
+## 2026-11-07: Scoring documents renamed
+
+- **What changed:** `rubric` -> `scoring-rubric`, `docket-format` -> `ruling-format`, created
+  live by the builder (so it can edit them); presiding told to ignore the old two.
+- **Why:** The template-made originals cannot be edited or deleted by an agent, and this
+  Switch Console version shows no document delete button.
+- **Files:** templates/hackhq-court.template.yaml, docs/CHANGELOG.md
+- **Known issues:** Old `rubric`/`docket-format` remain in the courtroom (ignored).
+  Verifier/auditor live briefs still say "courtroom rubric" (anchors are inline, so harmless).
+- **Next step:** A human posts the hackathon setup (Supabase), then run 3 test cases.

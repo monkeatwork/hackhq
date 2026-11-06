@@ -83,6 +83,9 @@ agents:
       - {court}-chamber-repro: private, with {court}-verifier (Technical execution).
       - {court}-chamber-sponsor: private, with {court}-auditor (Use of the sponsor).
       - {court}-chamber-defense: private, with {court}-defense (strongest case FOR the project).
+      Courtroom documents named "rubric" or "docket-format" belong to an
+      older version of this court: ignore them. Use "scoring-rubric" and
+      "ruling-format".
       Get room ids with list_rooms. The evaluators cannot see each other's
       chambers. Never quote one evaluator's findings to another before the
       ruling is drafted: their independence is the point of this court.
@@ -133,19 +136,19 @@ agents:
          WITHOUT SPONSOR lines. An ineligible case is still
          scored, so judges can see why, but its recommendation is REJECT.
 
-      6. DRAFT. Score each criterion 0-10 with the rubric document's weights
+      6. DRAFT. Score each criterion 0-10 with the "scoring-rubric" document's weights
          and its score anchors: Use of the sponsor 30, Technical execution 25,
          Creativity and impact 25, Presentation 20. Use the whole scale: a
          criterion with nothing to credit is 0, not 1 or 2. Take the
          auditor's and verifier's scores unless the evidence gate struck
-         what they rest on, and apply the rubric's caps. Creativity and
+         what they rest on, and apply the "scoring-rubric" caps. Creativity and
          Presentation you judge yourself from the README and the defense's
          evidence, and you mark them "low confidence" when you could not
-         watch the video. Apply the rubric's theme cap when the hackathon
+         watch the video. Apply the "scoring-rubric" theme cap when the hackathon
          sets a theme. The defense can move a score only with a cited
-         strength. Pick the recommendation with the "docket-format" rules,
+         strength. Pick the recommendation with the "ruling-format" rules,
          in their order. Post the draft in the case thread in the
-         "docket-format" layout. Save the full record with
+         "ruling-format" layout. Save the full record with
          create_room_document, named "case-C-n".
 
       7. RULING. Only a human judge decides. When a human replies in the
@@ -190,7 +193,7 @@ agents:
       4. Run their tests if they have any.
       5. Stop the sandbox.
 
-      SCORE with the "Technical execution" anchors in the courtroom rubric
+      SCORE with the "Technical execution" anchors in the courtroom's "scoring-rubric" document
       (they are repeated here). Running is the floor, not the score: judge
       how much working engineering the project shows.
         0   nothing runs, or there is no runnable code
@@ -278,7 +281,7 @@ agents:
         WORKS     a generic swap works just as well (the sponsor is decorative)
         N/A       the project does not use the sponsor's product at all
 
-      SCORE with the "Use of the sponsor" anchors in the courtroom rubric
+      SCORE with the "Use of the sponsor" anchors in the courtroom's "scoring-rubric" document
       (repeated here):
         0   the sponsor's product is not used
         2   mentioned or installed, but does no real work
@@ -355,10 +358,10 @@ rooms:
         instructions: |
           You hold the bench. Follow your instructions as presiding judge,
           the "hackathon", "evidence-gate", "eligibility" and
-          "docket-format" documents, and the rubric.
+          "ruling-format" documents, and the "scoring-rubric".
           Exactly one agent presides at a time.
     docs:
-      - name: rubric
+      - name: scoring-rubric
         description: The official judging criteria and weights
         instructions: Score every case on these four criteria with these weights. Do not add criteria.
         content: |
@@ -435,7 +438,7 @@ rooms:
           4. Something that could not be checked is UNRESOLVED, never scored as a failure.
           5. The presiding judge checks at least one citation per chamber personally.
           6. Merits and objections face the same gate. The defense gets no free points.
-      - name: docket-format
+      - name: ruling-format
         description: The layout of a draft ruling
         instructions: Post every draft ruling in exactly this layout, in the case thread.
         content: |
@@ -461,7 +464,7 @@ rooms:
           5. Otherwise                                      -> REJECT
     kickoff: |
       @{court}-presiding the court is in session. Take the presiding role,
-      read the rubric, evidence-gate, eligibility and docket-format documents, then
+      read the scoring-rubric, evidence-gate, eligibility and ruling-format documents, then
       introduce the court in three lines and say how to configure the
       hackathon and how to file a case.
 
