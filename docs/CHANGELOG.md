@@ -36,3 +36,14 @@
 - **Files:** HANDOFF.md, docs/CHANGELOG.md
 - **Known issues:** Court template not imported yet.
 - **Next step:** Import the court template in Switch Console, confirm 4 rooms and kickoffs.
+
+## 2026-11-06: Court created on Switch
+
+- **What changed:** Saved the court template in Switch (private, `hackhq-court`) and ran it:
+  4 agents (all claude) and 4 Discord rooms in HackHQ Building, with role, docs and links.
+- **Why:** Step 2, bring the court up.
+- **Files:** HANDOFF.md, docs/CHANGELOG.md
+- **Known issues:** Owner not added to private chamber channels by Discord. Verifier's
+  clone carries the builder's CLAUDE.md, which may confuse it. Kickoff replies not yet
+  confirmed (builder is not a member of the court rooms).
+- **Next step:** Confirm kickoffs, then file the first case (step 3).

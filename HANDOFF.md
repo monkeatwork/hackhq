@@ -130,6 +130,13 @@ no docker socket, `--cap-drop ALL`, `no-new-privileges`, 2 GB / 2 CPU / 512 pids
 
 Set up so far: Switch Console installed, Discord connected, a test agent answered.
 
+**Court created (Fri 17:18 IST)** by hackhq-builder via saved template `hackhq-court`
+(run_template; version 1 still runs): group "hackhq court", 4 rooms on the HackHQ Building
+Discord, agents presiding/verifier/auditor/defense all on claude, all running. Verifier's
+directory has the hackhq clone. Known gaps: Discord would not add monkeatsleep to the three
+private chambers (`add_users_to_room` returns unresolved); the verifier loads this repo's
+CLAUDE.md (builder rules) because its working directory is a clone of this repo.
+
 ## 5. Plan
 
 | When (IST) | Goal | Done when |
