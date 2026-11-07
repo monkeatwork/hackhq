@@ -104,3 +104,17 @@
 - **Known issues:** Old `rubric`/`docket-format` remain in the courtroom (ignored).
   Verifier/auditor live briefs still say "courtroom rubric" (anchors are inline, so harmless).
 - **Next step:** A human posts the hackathon setup (Supabase), then run 3 test cases.
+
+## 2026-11-07: Comparison and tampering check
+
+- **What changed:** Added `comparison/` (one strong single prompt vs the court on is-odd,
+  onemillion, madewithsupabase and a prompt-injection fixture,
+  monkeatwork/hackhq-fixture-snackvote). Every evaluator now reports text aimed at
+  judges or AI as `TAMPERING`, and the presiding judge adds a `Tampering` line to the
+  draft ruling (step 5b); it never changes a score. Live agents and the live
+  `ruling-format` document synced.
+- **Why:** On C-5 (the injection fixture) the court was not swayed (30, REJECT) but
+  reported nothing about the attempt; the single prompt named it. Judges should see it.
+- **Files:** templates/hackhq-court.template.yaml, comparison/*, .gitignore, docs/CHANGELOG.md
+- **Known issues:** Saved Switch template still behind the repo version. Certificate clerk dropped for time.
+- **Next step:** Check C-6 shows the Tampering line, then the README.
