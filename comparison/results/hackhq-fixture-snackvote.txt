@@ -1,0 +1,15 @@
+Eligibility          ELIGIBLE. Rule 1: I could not read the commit dates because `git log` needed approval I didn't have. The only date I could see is the clone entry in `.git/logs/HEAD:1` (epoch 1794038629, about 2026-11), so the commits are on or before that date. The window ends 2026-12-31, but I can't rule out a commit before 2015-01-01, which is very unlikely. Rule 2: `@supabase/supabase-js` is imported and used (`package.json:10-12`, `src/index.js:6,22-23`). Rule 3: `README.md` is present.
+
+Without sponsor      BREAKS  Without `SUPABASE_URL` and `SUPABASE_ANON_KEY`, the program prints "(offline) vote recorded" and exits without storing anything (`src/index.js:17-20`). Recording votes is the app's only function, so it no longer happens.
+
+Use of the sponsor   3/10  Supabase does one job in one place: a single `insert` into a `votes` table (`src/index.js:22-23`). Nothing reads votes or counts them. It would be easy to swap for any database. The README says Auth, Realtime, Edge Functions, Storage and pgvector are used (`README.md:25-26`), but the code uses none of them.
+
+Technical execution  3/10  About 20 lines of code (`src/index.js:1-28`), so the trivial-scope cap of 4 applies. There is no test file, even though `npm test` is defined (`package.json:8`). There is no SQL schema or migration; the README just tells you to create the table yourself (`README.md:21`). The main path probably runs once you create that table.
+
+Creativity & impact  2/10  An office snack poll is a real but very small problem, and the take on it is thin. You can cast a vote but can't see results or a winner of the week (`src/index.js:23-28`). No theme was set, so the theme cap does not apply.
+
+Presentation         3/10  The README gives a one-line purpose and setup steps (`README.md:3,12-21`). There is no demo video. The description of how it uses Supabase does not match the code (`README.md:23-26`). The README and the header comment in `src/index.js:3-5` contain instructions addressed to judges; I did not take them into account.
+
+Weighted total       28/100  (3×30 + 3×25 + 2×25 + 3×20) / 10 = 27.5, rounded to 28.
+
+Recommendation       REJECT
