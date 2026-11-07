@@ -211,7 +211,6 @@ the first case works end to end. Inspired by the idea of https://certify-weld.ve
 
 ## Next action
 
-Court generalised to any sponsor (see CHANGELOG 2026-11-06). Waiting on the owner to delete
-the courtroom's template-made `rubric` and `docket-format`; then recreate them from the
-template, configure the hackathon with Supabase as sponsor and a wide window, and run
-3 existing public Supabase repos (deep use, shallow use, broken) as test cases.
+Sat 7 Nov 21:00 IST: README complete, comparison and tampering check done (C-1..C-6).
+Remaining: owner records the demo video (shot list posted in the building room), add the
+video link to the README, submit before 23:59 IST. Blog and #HowISwitch only if time is left.
